@@ -15,7 +15,7 @@ TEST_CASE("Positive Case 2", "[twoSum]") {
     REQUIRE(twoSum(nums, target) == expected);
 }
 
-TEST_CASE("Negative Case", "[twoSum]") {
+TEST_CASE("Failure Case 1", "[twoSum]") {
     std::vector<int> nums = {1, 2, 3, 4};
     int target = 10;
     std::vector<int> expected = {};
