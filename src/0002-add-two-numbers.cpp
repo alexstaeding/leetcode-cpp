@@ -7,35 +7,22 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
   ListNode *tail = nullptr;
 
   while (l1 != nullptr || l2 != nullptr) {
+    int currentDigit = (l1 != nullptr ? l1->val : 0)
+        + (l2 != nullptr ? l2->val : 0)
+        + carry;
+
+    if (currentDigit >= 10) {
+      carry = 1;
+      currentDigit -= 10;
+    } else {
+      carry = 0;
+    }
+
     if (head == nullptr) {
-      if (((l1 != nullptr ? l1->val : 0)
-          + (l2 != nullptr ? l2->val : 0)
-          + carry) > 9) {
-        head = new ListNode((l1 != nullptr ? l1->val : 0)
-                                + (l2 != nullptr ? l2->val : 0)
-                                + carry - 10);
-        carry = 1;
-      } else {
-        head = new ListNode((l1 != nullptr ? l1->val : 0)
-                                + (l2 != nullptr ? l2->val : 0)
-                                + carry);
-        carry = 0;
-      }
+      head = new ListNode(currentDigit);
       tail = head;
     } else {
-      if (((l1 != nullptr ? l1->val : 0)
-          + (l2 != nullptr ? l2->val : 0)
-          + carry) > 9) {
-        tail->next = new ListNode((l1 != nullptr ? l1->val : 0)
-                                      + (l2 != nullptr ? l2->val : 0)
-                                      + carry - 10);
-        carry = 1;
-      } else {
-        tail->next = new ListNode((l1 != nullptr ? l1->val : 0)
-                                      + (l2 != nullptr ? l2->val : 0)
-                                      + carry);
-        carry = 0;
-      }
+      tail->next = new ListNode(currentDigit);
       tail = tail->next;
     }
 
