@@ -2,35 +2,25 @@
 
 std::string longestPalindrome(const std::string &s) {
   int maxSize = 0;
-  std::string maxString;
+  int start = 0;
   for (int mid = 0; mid < s.length(); mid++) {
-    int oddRadius = 1;
-    while (mid - oddRadius >= 0 && mid + oddRadius < s.length()
-        && s.at(mid - oddRadius) == s.at(mid + oddRadius)) {
-      oddRadius++;
+    for (int x : {0, 1}) {
+      int left = mid;
+      int right = mid + x;
+      while (left >= 0 && right < s.length() && s[left] == s[right]) {
+        --left;
+        ++right;
+      }
+      ++left;
+      --right;
+      if (right - left + 1 > maxSize) {
+        maxSize = right - left + 1;
+        start = left;
+      }
     }
-    oddRadius--;
-
-    int evenRadius = 1;
-    while (mid - evenRadius >= 0 && mid + evenRadius - 1 < s.length()
-        && s.at(mid - evenRadius) == s.at(mid + evenRadius - 1)) {
-      evenRadius++;
-    }
-    evenRadius--;
-
-    if (oddRadius * 2 + 1 > maxSize) {
-      maxSize = oddRadius * 2 + 1;
-      maxString = s.substr(mid - oddRadius, 2 * oddRadius + 1);
-    }
-
-    if (evenRadius * 2 > maxSize) {
-      maxSize = evenRadius * 2;
-      maxString = s.substr(mid - evenRadius, 2 * evenRadius);
-    }
-
     if (maxSize >= 2 * (s.length() - mid)) {
       break;
     }
   }
-  return maxString;
+  return s.substr(start, maxSize);
 }
