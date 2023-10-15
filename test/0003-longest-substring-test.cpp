@@ -19,6 +19,12 @@ TEST_CASE("Positive Case 3", "[lengthOfLongestSubstring]") {
   REQUIRE(lengthOfLongestSubstring(s) == expected);
 }
 
+TEST_CASE("Positive Case 4", "[lengthOfLongestSubstring]") {
+  std::string s = "abba";
+  int expected = 2;
+  REQUIRE(lengthOfLongestSubstring(s) == expected);
+}
+
 TEST_CASE("Edge Case 1: Empty String", "[lengthOfLongestSubstring]") {
   std::string s;
   int expected = 0;
