@@ -27,6 +27,10 @@ std::string longestPalindrome(const std::string &s) {
       maxSize = evenRadius * 2;
       maxString = s.substr(mid - evenRadius, 2 * evenRadius);
     }
+
+    if (maxSize >= 2 * (s.length() - mid)) {
+      break;
+    }
   }
   return maxString;
 }
